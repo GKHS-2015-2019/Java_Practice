@@ -1,0 +1,21 @@
+line 1 --
+	need import(s)
+
+line 7 --
+	console.nextString() --> console.nextLine()
+
+line 11 -- 
+	string --> String
+	"name" --> name
+
+line 12 --
+	name == whitaker --> name.equals("whitaker")
+
+line 15 --
+	replace("a", "e") -- name.replace("a", "e")
+
+line 16 --
+	toUppercase(name) -- name.toUpperCase()
+
+line 18 --
+	System.out.println(name + " has " + name.length + " letters"); --> System.out.println(name + " has " + name.length() + " letters");

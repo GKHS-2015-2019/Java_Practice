@@ -1,0 +1,62 @@
+import java.awt.Graphics;
+import java.awt.Color;
+
+public class Illusion{
+   public static void main(String[] args){
+      DrawingPanel p = new DrawingPanel(500, 400);
+      Graphics g = p.getGraphics();
+      p.setBackground(Color.GRAY);
+      
+      //draw top left            --circle
+      drawCircle(g, 0, 0, 90, 90, 3, 15);
+      //draw top second left     -- circle
+      drawCircle(g, 120, 10, 90, 90, 3, 15);
+      //draw top left            -- small cicle
+      drawCircle(g, 250, 50, 80, 80, 5, 8);
+      
+      
+      //draw bottom left         -- grid
+      drawGrid(g, 10, 120, 100, 100, 10, 2, 5);
+      //draw top right
+      drawGrid(g, 350, 20, 40, 40, 5, 3, 4);
+      //draw bottom right
+      drawGrid(g, 230, 160, 50, 50, 5, 4, 4);
+   }
+   //draws a circle at the give x and y cordinates with the given width and height
+   public static void drawCircle(Graphics g, int x, int y, int w, int h, int circ, int gap){
+      
+      int size = gap *2;
+      g.setColor(Color.RED);
+      //Draw Circle                 -- RED
+      g.fillOval(x, y, w, h);
+      
+      g.setColor(Color.BLACK);
+      //Draw smaller circles        -- BLACK
+      for(int i= 1;i<= circ; i++){
+         g.drawOval(i*gap+x-gap, i*gap+y-gap, w-i*size+size, h-i*size+size);
+      }
+      
+      //Draw Diamond                -- BLACK
+      g.drawLine(w/2+x,     y,   w+x, w/2+y);
+      g.drawLine(  w+x, w/2+y, w/2+x,   w+y);
+      g.drawLine(w/2+x,   w+y,     x, w/2+y);
+      g.drawLine(    x, w/2+y, w/2+x,     y);
+   }
+   //draws a grid of circle at the give x and y cordinates with the given width and height
+   public static void drawGrid(Graphics g, int x, int y, int w, int h, int circ, int row, int gap){
+      //set up background box
+      g.setColor(Color.LIGHT_GRAY);
+      //draw background
+      g.fillRect(x, y, w*row, h*row);
+      g.setColor(Color.RED);
+      //draw border
+      g.drawRect(x, y, w*row, h*row);
+      
+      //call/draw cicrcles based off the grids width height, x and y
+      for(int i= 0; i < row; i++){
+         for(int j= 0; j < row; j++){
+            drawCircle(g,   x+j*w,  y+i*h, w, h, circ, gap);
+        }
+      }
+   }
+}
